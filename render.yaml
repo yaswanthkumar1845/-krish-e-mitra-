@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: krish-e-mitra-backend
+    runtime: python
+    startCommand: "cd Krish-e-Mitra/fertilizer-advisory-system/backend && uvicorn main:app --host 0.0.0.0 --port $PORT"
+    buildCommand: "cd Krish-e-Mitra/fertilizer-advisory-system/backend && pip install -r requirements.txt"
+    envVars:
+      - key: DATABASE_URL
+        value: sqlite:///./data/fertilizer_advisory.db
+      - key: PYTHON_VERSION
+        value: "3.9"
+
+  - type: web
+    name: krish-e-mitra-frontend
+    runtime: node
+    buildCommand: "cd Krish-e-Mitra/fertilizer-advisory-system/frontend && npm install && npm run build"
+    startCommand: "cd Krish-e-Mitra/fertilizer-advisory-system/frontend && npm run preview -- --host 0.0.0.0 --port $PORT"
+    staticSiteDir: Krish-e-Mitra/fertilizer-advisory-system/frontend/dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          name: krish-e-mitra-backend
+          property: url

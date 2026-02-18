@@ -1,0 +1,8 @@
+{
+  "version": 2,
+  "buildCommand": "cd Krish-e-Mitra/fertilizer-advisory-system/frontend && npm install && npm run build",
+  "outputDirectory": "Krish-e-Mitra/fertilizer-advisory-system/frontend/dist",
+  "env": {
+    "VITE_API_URL": "https://krish-e-mitra-api.onrender.com"
+  }
+}
